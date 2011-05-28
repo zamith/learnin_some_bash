@@ -1,0 +1,78 @@
+\frametitle {Pipes e redireccionamento}
+\begin{columns}
+\begin{column}[lc]{.5\textwidth}
+\begin{itemize}
+\uncover<1->{\item Operador $>$}
+\uncover<2->{\item Operador $>>$}
+\uncover<3->{\item Operador $<$}
+\uncover<4->{\item Pipe $|$}
+\uncover<5->{\item Redireccionar file descriptors}
+\uncover<6->{\item Auto-redireccionamento \emph{inline}}
+\end{itemize}
+\end{column}
+
+\begin{column}[t]{.5\textwidth}
+\only<1>{
+\begin{semiverbatim}
+\begin{block}{Operador $>$}
+\$ echo Hello > testFile \\
+\$ cat testFile \\
+\emph{Hello}
+\end{block}
+\end{semiverbatim}
+}
+\only<2>{
+\begin{semiverbatim}
+\begin{block}{Operador $>>$}
+\$ echo Hello2 >> testFile \\
+\$ cat testFile \\
+\emph{Hello} \\
+\emph{Hello2} \\
+\end{block}
+\end{semiverbatim}
+}
+\only<3>{
+\begin{semiverbatim}
+\begin{block}{Operador $<$}
+\$ cat < testFile \\
+\emph{Hello} \\
+\emph{Hello2} \\
+\end{block}
+\end{semiverbatim}
+}
+\only<4>{
+\begin{semiverbatim}
+\begin{block}{Pipe $|$}
+\$ cat testFile | sort -r \\
+\emph{Hello2} \\
+\emph{Hello} \\
+\end{block}
+\end{semiverbatim}
+}
+\only<5>{
+\begin{semiverbatim}
+\begin{block}{Redireccionar file descriptors}
+\$ rm direct/ \\
+\emph{rm: direct/: is a directory} \\
+
+\$ rm direct/ 2> error \\
+
+\$ rm direct/ 2>\&1   \\
+\emph{rm: direct/: is a directory} \\
+\end{block}
+\end{semiverbatim}
+}
+\only<6>{
+\begin{semiverbatim}
+\begin{block}{HERE Documents}
+\$ bc << HERE \\
+> 12+12 -5 \\
+> 100*10-200 \\
+> HERE \\
+\emph{19} \\
+\emph{800}
+\end{block}
+\end{semiverbatim}
+}
+\end{column}
+\end{columns}
