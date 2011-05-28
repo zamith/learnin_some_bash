@@ -1,0 +1,24 @@
+# Specific ignores
+research/Sams.Linux.Shell.Scripting.with.Bash.eBook-LinG.pdf
+
+# Linux ignores
+.*
+*~
+*.sw[a-p]
+.directory
+
+# Vim ignores
+.*.sw[a-z]
+*.un~
+
+# OSX ignores
+.DS_Store?
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# TextMate ignores
+*.tmproj
+*.tmproject
+tmtags
