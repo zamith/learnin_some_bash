@@ -22,3 +22,13 @@ Icon?
 *.tmproj
 *.tmproject
 tmtags
+
+# LaTeX ignores
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
