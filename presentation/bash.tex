@@ -2,20 +2,31 @@
 
 \usetheme{Warsaw}
 
-\usepackage[english]{babel}
+\usepackage[portuges]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{fancybox}
-%\usepackage{listings}
+\usepackage{listings}
 %\definecolor{keywords}{RGB}{255,0,90}
 %\definecolor{comments}{RGB}{60,179,113}
 %\lstset{language=Erlang,
 %	    keywordstyle=color{keywords},
 %	    commentstyle=color{comments}\emph}
 
+\usepackage{listings}
+\usepackage{color}
+\definecolor{MyDarkBlue}{rgb}{0,0.08,0.45}
+\definecolor{red}{rgb}{1,0,0}
+\lstset{frame=shadowbox, rulesepcolor=\color{MyDarkBlue}, morecomment=[l]{\#},numbers=left, numbersep=7pt, language=bash, showstringspaces=false, basicstyle=\footnotesize}
+
 % AMSLaTeX packages
 %\usepackage{amsthm}
 %\usepackage{amsmath}
 %\usepackage{amsfonts}
+%
+%\theoremstyle{definition}
+%\newtheorem{codelist}{Code Listing}[chapter]
+
 
 % we want to use images
 \usepackage{graphicx}
@@ -125,7 +136,91 @@
 	\end{frame}
 	
 	\begin{frame}
-		\frametitle{Variáveis em BASH}
+		\frametitle{5 coisas que deves saber antes de escrever um script}
+		\begin{enumerate}
+			\item Há 3 tipos de quotes:
+			\begin{description}
+				\item[Aspas] Aceitas espaços e expande variáveis 
+				\item[Pelicas] Aceita espaços mas não expande variáveis
+				\item[Backslash] Faz escape ao valor de .
+			\end{description}
+			\item \emph{Globbing}
+			\begin{itemize}
+				\item *
+				\item \{...\}
+				\item outros (?, [\ldots], [\^{}\ldots])
+			\end{itemize}
+			\item \$(comando), encapsula o \emph{output} do comando
+			\item var="ls ." \footnote{Não pode haver espaços entre o igual, e se houver espaços no valor este tem de estar entre aspas}
+			\item Comentários são feitos com o \#
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{O primeiro script}
+		\begin{lstlisting}
+			#!/bin/bash
+
+			echo "Name of file to cat:"
+			read file
+			cat $file
+
+			greeting="\nHello World"
+			echo -e $greeting
+
+			exit 0
+		\end{lstlisting}
+		\begin{itemize}
+			\item A linha 1 diz à shell qual o interpretador a usar e começa sempre com \#!
+			\item Por norma um script que termine correctamente deve retornar o valor 0
+		\end{itemize}
+		
+		{\small Para correr o script basta dar permissões de execução a toda a gente (ou não), com \emph{chmod +x file.sh} e corrê-lo \emph{./file.sh}}
+	\end{frame}		
+	
+	\begingroup
+		\setbeamertemplate{background canvas}[vertical shading][top=white,bottom=green!25]
+		\setbeamercolor{frametitle}{bg=green}
+		\setbeamercolor{title in head/foot}{bg=green!75}		
+	 
+		\begin{frame}
+			\frametitle{Comando do minuto}
+		\end{frame}	
+	\endgroup
+	
+	\begin{frame}
+		\frametitle{Variáveis de ambiente}
+		
+		No início de qualquer script bash temos acesso a algumas variáveis, que podem ser alteradas com um export ou no .bashrc
+		
+		{\footnotesize
+		\begin{description}
+			\item[\$HOME] Home do utilizador actual
+			\item[\$PATH] Lista de directorias onde são procurados os comandos
+			\item[\$PS1] Definição da prompt (ex: \textbackslash h:\textbackslash W \textbackslash u \textbackslash \$)
+			\item[\$PS2] Prompt secundária, normalemente $>$
+			\item[\$IFS] \emph{Input Field Separator}. Lista de caracteres usados para separar palavras quando a ler do \emph{input}
+			\item[\$0] O nome do script
+			\item[\$\#] O número de parâmetros passados
+			\item[\$\$] O PID do script (normalmente usado para criar ficheiros temporários) 
+		\end{description}
+		}
+		
+		Para ver todas as variáveis de ambiente, \emph{printenv}\footnote{\url{http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_02.html}}
+		
+	\end{frame}	
+	
+	\begin{frame}
+		\frametitle{Variáveis dos parâmetros}
+		
+		Este tipo de variáveis são um subconjunto das de ambiente, que dizem respeito aos parâmetros recebidos pelo script
+
+		\begin{description}
+			\item[\$1, \$2, ...] Os parâmetros passados, por ordem
+			\item[\$*] Lista de todos os parâmetros, separadas pelo primeiro caracter em IFS
+			\item[\$@] Uma variação de \$*, que usa sempre o espaço como separador (aconselhado)
+		\end{description}
+		
 	\end{frame}	
 		
 \end{document}	
